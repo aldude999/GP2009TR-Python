@@ -1,0 +1,29 @@
+Computer serial port: 9600 BPS
+              8 bits data
+              1 stop bit
+              NO Parity
+Transmitter receiving computer information format:
+              0x19-------->Information start
+              
+              1byte ------>'R'
+              
+              7 bytes ---->Address code (ascii format '0'-->0x30,'1'--->0x31)
+              
+              1 byte ---->Control word (bit 7----> 1
+                                    bit 6----> 1---->After sending the message, send a long preamble, 0--->turn off the function
+                                    bit 5,4--> 00-->A TONE,01-->B TONE,10-->C TONE,11-->D TONE,
+                                    bit 3----> 0---->digital information, 1---->text information
+                                    bit 2,1--> POCSAG sending rate 00->512,01--->1200,10-->2400
+                                    bit 0----> signal polarity 0--->forward, 1--->reverse
+              
+              N Bytes ----> Information content should not exceed 300 characters, 8bit ascii code.
+              
+              
+              0X18-------->End of message
+
+For example: use address 1234567, forward direction, 1200BPS, A call to send "ABCDEFGH"
+    Then send 0x19,"R1234567",0X8A,"ABCDEFGH",0X18 through the serial port
+
+note:
+      After the transmitter receives the information, the sending is completed, and it sends 0x19, "RXOK", 0X18 to the sending software through the serial port
+      The transmitter does not receive serial port information when it does not send complete information
