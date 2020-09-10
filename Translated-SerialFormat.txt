@@ -14,7 +14,7 @@ Transmitter receiving computer information format:
                                     bit 5,4--> 00-->A TONE,01-->B TONE,10-->C TONE,11-->D TONE,
                                     bit 3----> 0---->digital information, 1---->text information
                                     bit 2,1--> POCSAG sending rate 00->512,01--->1200,10-->2400
-                                    bit 0----> signal polarity 0--->forward, 1--->reverse
+                                    bit 0----> signal polarity 0--->forward, 1--->reverse # THIS LOOKS WRONG, Setting to 1 appears to be forward, setting to 0 causes weird issues on pagers - aldude999
               
               N Bytes ----> Information content should not exceed 300 characters, 8bit ascii code.
               
